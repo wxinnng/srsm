@@ -5,14 +5,24 @@ const getServiceInfo = async():Promise<any> => {
     var res = await service.get(API_PREFIX+'/serviceInfo')
     return res;
 }
-const getServiceGroup = () => {
-
+const getServiceGroup = async():Promise<any> => {
 }
-const getServiceStategry = () => {
-
+const getServiceManagementInfo = async ():Promise<any> => {
+    var res = await service.get(API_PREFIX + "/serviceManagement")
+    return res;
 }
-export default { 
+const getServiceStategry = async():Promise<any> => {
+    var res = await service.get(API_PREFIX + '/serviceStrategy')
+    return res;
+}
+const login = async (account:string,password:string):Promise<any> => {
+    var res = await service.get(API_PREFIX + `/login/${account}/${password}`)
+    return res;
+}
+export default {
+    login, 
     getServiceInfo, 
     getServiceGroup,
-    getServiceStategry
+    getServiceStategry,
+    getServiceManagementInfo
 }

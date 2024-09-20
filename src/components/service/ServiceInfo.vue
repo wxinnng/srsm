@@ -23,7 +23,7 @@ import { ref } from 'vue';
 //组件挂载的时候，就获取服务信息
 onMounted(async () => {
   var res = await api.getServiceInfo();
-  tableData.value = res.data["serviceInfo"]["serviceInfo"];
+  tableData.value = res.data["serviceInfo"];
   console.log(tableData.value)
 })
 // 服务信息

@@ -21,15 +21,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-interface Service {
-  serviceName: string;
-  instanceCount: number;
-  versionCount: number;
-  status: number;
-  grougCount:number;
-  remoteRegistry: string;
-}
+import { ref ,onMounted,Ref} from "vue";
+import { ServiceManagementInfo } from "../../interface";
+import api from '../../hooks/api'
+
+onMounted(async () => {
+  var res = await api.getServiceManagementInfo()
+  data.value = res.data['serviceManagement']
+})
+const data: Ref<ServiceManagementInfo[]> = ref([])
 const getType = (status: number) => {
   switch (status) {
     case 1:
@@ -50,58 +50,6 @@ const getDescribe = (status: number) => {
       return "停止";
   }
 }
-
-const data: Service[] = [
-  {
-    serviceName: "service1",
-    instanceCount: 1,
-    versionCount: 1,
-    status: 1,
-    grougCount:1,
-    remoteRegistry: "http://localhost:8080"
-  },
-  {
-    serviceName: "service2",
-    instanceCount: 2,
-    versionCount: 2,
-    grougCount:2,
-    status: 3,
-    remoteRegistry: "http://localhost:8080"
-  },
-  {
-    serviceName: "service3",
-    instanceCount: 3,
-    versionCount: 3,
-    grougCount:3,
-    status: 2,
-    remoteRegistry: "http://localhost:8080"
-  },
-  {
-    serviceName: "service4",
-    instanceCount: 4,
-    versionCount: 4,
-    grougCount:4,
-    status: 1,
-    remoteRegistry: "http://localhost:8080"
-  },
-  {
-    serviceName: "service5",
-    instanceCount: 5,
-    versionCount: 5,
-    grougCount:5,
-    status: 1,
-    remoteRegistry: "http://localhost:8080"
-  },
-  {
-    serviceName: "service6",
-    instanceCount: 6,
-    versionCount: 6,
-    grougCount:6,
-    status: 1,
-    remoteRegistry: "http://localhost:8080"
-  }
-]
-
 </script>
 <style lang="scss" scoped>
 .container {
